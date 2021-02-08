@@ -274,39 +274,39 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   private backspace(event: KeyboardEvent): void {
-    const { BlockManager, BlockSelection, Caret } = this.Editor;
-    const currentBlock = BlockManager.currentBlock;
-    const tool = this.Editor.Tools.available[currentBlock.name];
+    // const { BlockManager, BlockSelection, Caret } = this.Editor;
+    // const currentBlock = BlockManager.currentBlock;
+    // const tool = this.Editor.Tools.available[currentBlock.name];
 
-    /**
-     * Check if Block should be removed by current Backspace keydown
-     */
-    if (currentBlock.selected || (currentBlock.isEmpty && currentBlock.currentInput === currentBlock.firstInput)) {
-      event.preventDefault();
+    // /**
+    //  * Check if Block should be removed by current Backspace keydown
+    //  */
+    // if (currentBlock.selected || (currentBlock.isEmpty && currentBlock.currentInput === currentBlock.firstInput)) {
+    //   event.preventDefault();
 
-      const index = BlockManager.currentBlockIndex;
+    //   const index = BlockManager.currentBlockIndex;
 
-      if (BlockManager.previousBlock && BlockManager.previousBlock.inputs.length === 0) {
-        /** If previous block doesn't contain inputs, remove it */
-        BlockManager.removeBlock(index - 1);
-      } else {
-        /** If block is empty, just remove it */
-        BlockManager.removeBlock();
-      }
+    //   if (BlockManager.previousBlock && BlockManager.previousBlock.inputs.length === 0) {
+    //     /** If previous block doesn't contain inputs, remove it */
+    //     BlockManager.removeBlock(index - 1);
+    //   } else {
+    //     /** If block is empty, just remove it */
+    //     BlockManager.removeBlock();
+    //   }
 
-      Caret.setToBlock(
-        BlockManager.currentBlock,
-        index ? Caret.positions.END : Caret.positions.START
-      );
+    //   Caret.setToBlock(
+    //     BlockManager.currentBlock,
+    //     index ? Caret.positions.END : Caret.positions.START
+    //   );
 
-      /** Close Toolbar */
-      this.Editor.Toolbar.close();
+    //   /** Close Toolbar */
+    //   this.Editor.Toolbar.close();
 
-      /** Clear selection */
-      BlockSelection.clearSelection(event);
+    //   /** Clear selection */
+    //   BlockSelection.clearSelection(event);
 
-      return;
-    }
+    //   return;
+    // }
 
     /**
      * Don't handle Backspaces when Tool sets enableLineBreaks to true.
@@ -314,27 +314,27 @@ export default class BlockEvents extends Module {
      *
      * But if caret is at start of the block, we allow to remove it by backspaces
      */
-    if (tool && tool[this.Editor.Tools.INTERNAL_SETTINGS.IS_ENABLED_LINE_BREAKS] && !Caret.isAtStart) {
-      return;
-    }
+    // if (tool && tool[this.Editor.Tools.INTERNAL_SETTINGS.IS_ENABLED_LINE_BREAKS] && !Caret.isAtStart) {
+    //   return;
+    // }
 
-    const isFirstBlock = BlockManager.currentBlockIndex === 0;
-    const canMergeBlocks = Caret.isAtStart &&
-      SelectionUtils.isCollapsed &&
-      currentBlock.currentInput === currentBlock.firstInput &&
-      !isFirstBlock;
+    // const isFirstBlock = BlockManager.currentBlockIndex === 0;
+    // const canMergeBlocks = Caret.isAtStart &&
+    //   SelectionUtils.isCollapsed &&
+    //   currentBlock.currentInput === currentBlock.firstInput &&
+    //   !isFirstBlock;
 
-    if (canMergeBlocks) {
-      /**
-       * preventing browser default behaviour
-       */
-      event.preventDefault();
+    // if (canMergeBlocks) {
+    //   /**
+    //    * preventing browser default behaviour
+    //    */
+    //   event.preventDefault();
 
-      /**
-       * Merge Blocks
-       */
-      this.mergeBlocks();
-    }
+    //   /**
+    //    * Merge Blocks
+    //    */
+    //   this.mergeBlocks();
+    // }
   }
 
   /**
