@@ -16,6 +16,8 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   public keydown(event: KeyboardEvent): void {
+    console.log('event', this.config);
+
     /**
      * Run common method for all keydown events
      */
@@ -206,6 +208,9 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   private enter(event: KeyboardEvent): void {
+    if (this.config.isStructuredReport) {
+      return;
+    }
     const { BlockManager, Tools, UI } = this.Editor;
     const currentBlock = BlockManager.currentBlock;
     const tool = Tools.available[currentBlock.name];
@@ -230,10 +235,10 @@ export default class BlockEvents extends Module {
      * Allow to create linebreaks by Shift+Enter
      */
     if (event.shiftKey) {
-      return;
+
     }
 
-    let newCurrent = this.Editor.BlockManager.currentBlock;
+    // let newCurrent = this.Editor.BlockManager.currentBlock;
 
     /**
      * If enter has been pressed at the start of the text, just insert paragraph Block above
@@ -274,39 +279,46 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   private backspace(event: KeyboardEvent): void {
-    // const { BlockManager, BlockSelection, Caret } = this.Editor;
-    // const currentBlock = BlockManager.currentBlock;
-    // const tool = this.Editor.Tools.available[currentBlock.name];
+    // TODO disabled if set
 
-    // /**
-    //  * Check if Block should be removed by current Backspace keydown
-    //  */
-    // if (currentBlock.selected || (currentBlock.isEmpty && currentBlock.currentInput === currentBlock.firstInput)) {
-    //   event.preventDefault();
+    console.log('backspace isStructuredReport', this.config.isStructuredReport);
 
-    //   const index = BlockManager.currentBlockIndex;
+    if (this.config.isStructuredReport) {
+      return;
+    }
+    const { BlockManager, BlockSelection, Caret } = this.Editor;
+    const currentBlock = BlockManager.currentBlock;
+    const tool = this.Editor.Tools.available[currentBlock.name];
 
-    //   if (BlockManager.previousBlock && BlockManager.previousBlock.inputs.length === 0) {
-    //     /** If previous block doesn't contain inputs, remove it */
-    //     BlockManager.removeBlock(index - 1);
-    //   } else {
-    //     /** If block is empty, just remove it */
-    //     BlockManager.removeBlock();
-    //   }
+    /**
+     * Check if Block should be removed by current Backspace keydown
+     */
+    if (currentBlock.selected || (currentBlock.isEmpty && currentBlock.currentInput === currentBlock.firstInput)) {
+      event.preventDefault();
 
-    //   Caret.setToBlock(
-    //     BlockManager.currentBlock,
-    //     index ? Caret.positions.END : Caret.positions.START
-    //   );
+      const index = BlockManager.currentBlockIndex;
 
-    //   /** Close Toolbar */
-    //   this.Editor.Toolbar.close();
+      if (BlockManager.previousBlock && BlockManager.previousBlock.inputs.length === 0) {
+        /** If previous block doesn't contain inputs, remove it */
+        BlockManager.removeBlock(index - 1);
+      } else {
+        /** If block is empty, just remove it */
+        BlockManager.removeBlock();
+      }
 
-    //   /** Clear selection */
-    //   BlockSelection.clearSelection(event);
+      Caret.setToBlock(
+        BlockManager.currentBlock,
+        index ? Caret.positions.END : Caret.positions.START
+      );
 
-    //   return;
-    // }
+      /** Close Toolbar */
+      this.Editor.Toolbar.close();
+
+      /** Clear selection */
+      BlockSelection.clearSelection(event);
+
+      return;
+    }
 
     /**
      * Don't handle Backspaces when Tool sets enableLineBreaks to true.
@@ -314,27 +326,27 @@ export default class BlockEvents extends Module {
      *
      * But if caret is at start of the block, we allow to remove it by backspaces
      */
-    // if (tool && tool[this.Editor.Tools.INTERNAL_SETTINGS.IS_ENABLED_LINE_BREAKS] && !Caret.isAtStart) {
-    //   return;
-    // }
+    if (tool && tool[this.Editor.Tools.INTERNAL_SETTINGS.IS_ENABLED_LINE_BREAKS] && !Caret.isAtStart) {
+      return;
+    }
 
-    // const isFirstBlock = BlockManager.currentBlockIndex === 0;
-    // const canMergeBlocks = Caret.isAtStart &&
-    //   SelectionUtils.isCollapsed &&
-    //   currentBlock.currentInput === currentBlock.firstInput &&
-    //   !isFirstBlock;
+    const isFirstBlock = BlockManager.currentBlockIndex === 0;
+    const canMergeBlocks = Caret.isAtStart &&
+      SelectionUtils.isCollapsed &&
+      currentBlock.currentInput === currentBlock.firstInput &&
+      !isFirstBlock;
 
-    // if (canMergeBlocks) {
-    //   /**
-    //    * preventing browser default behaviour
-    //    */
-    //   event.preventDefault();
+    if (canMergeBlocks) {
+      /**
+       * preventing browser default behaviour
+       */
+      event.preventDefault();
 
-    //   /**
-    //    * Merge Blocks
-    //    */
-    //   this.mergeBlocks();
-    // }
+      /**
+       * Merge Blocks
+       */
+      this.mergeBlocks();
+    }
   }
 
   /**

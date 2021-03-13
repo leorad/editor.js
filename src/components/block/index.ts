@@ -422,11 +422,11 @@ export default class Block {
    * @param {boolean} state - 'true' to select, 'false' to remove selection
    */
   public set selected(state: boolean) {
-    if (state) {
-      this.holder.classList.add(Block.CSS.selected);
-    } else {
-      this.holder.classList.remove(Block.CSS.selected);
-    }
+    // if (state) {
+    //   this.holder.classList.add(Block.CSS.selected);
+    // } else {
+    //   this.holder.classList.remove(Block.CSS.selected);
+    // }
   }
 
   /**

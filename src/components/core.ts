@@ -43,6 +43,8 @@ export default class Core {
    */
   public config: EditorConfig;
 
+  public isStructuredReport?: boolean
+
   /**
    * Object with core modules instances
    */
@@ -120,6 +122,8 @@ export default class Core {
      * Make config object
      */
     if (!_.isObject(config)) {
+      console.log('CONFIG >>>', config);
+
       config = {
         holder: config,
       };
@@ -140,6 +144,9 @@ export default class Core {
      * @type {EditorConfig}
      */
     this.config = config;
+    console.log('CONFIG >', config);
+
+    this.isStructuredReport = config.isStructuredReport;
 
     /**
      * If holder is empty then set a default value

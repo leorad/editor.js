@@ -20,6 +20,8 @@ export interface EditorConfig {
    */
   autofocus?: boolean;
 
+  isStructuredReport?: boolean;
+
   /**
    * This Tool will be used as default
    * Name should be equal to one of Tool`s keys of passed tools

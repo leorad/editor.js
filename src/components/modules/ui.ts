@@ -446,29 +446,32 @@ export default class UI extends Module<UINodes> {
    * @param {KeyboardEvent} event - keyboard event
    */
   private backspacePressed(event: KeyboardEvent): void {
-    // const { BlockManager, BlockSelection, Caret } = this.Editor;
+    if (this.config.isStructuredReport) {
+      return;
+    }
+    const { BlockManager, BlockSelection, Caret } = this.Editor;
 
-    // /**
-    //  * If any block selected and selection doesn't exists on the page (that means no other editable element is focused),
-    //  * remove selected blocks
-    //  */
-    // if (BlockSelection.anyBlockSelected && !Selection.isSelectionExists) {
-    //   const selectionPositionIndex = BlockManager.removeSelectedBlocks();
+    /**
+     * If any block selected and selection doesn't exists on the page (that means no other editable element is focused),
+     * remove selected blocks
+     */
+    if (BlockSelection.anyBlockSelected && !Selection.isSelectionExists) {
+      const selectionPositionIndex = BlockManager.removeSelectedBlocks();
 
-    //   Caret.setToBlock(BlockManager.insertDefaultBlockAtIndex(selectionPositionIndex, true), Caret.positions.START);
+      Caret.setToBlock(BlockManager.insertDefaultBlockAtIndex(selectionPositionIndex, true), Caret.positions.START);
 
-    //   /** Clear selection */
-    //   BlockSelection.clearSelection(event);
+      /** Clear selection */
+      BlockSelection.clearSelection(event);
 
-    //   /**
-    //    * Stop propagations
-    //    * Manipulation with BlockSelections is handled in global backspacePress because they may occur
-    //    * with CMD+A or RectangleSelection and they can be handled on document event
-    //    */
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    //   event.stopImmediatePropagation();
-    // }
+      /**
+       * Stop propagations
+       * Manipulation with BlockSelections is handled in global backspacePress because they may occur
+       * with CMD+A or RectangleSelection and they can be handled on document event
+       */
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    }
   }
 
   /**
