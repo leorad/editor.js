@@ -16,8 +16,6 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   public keydown(event: KeyboardEvent): void {
-    console.log('event', this.config);
-
     /**
      * Run common method for all keydown events
      */
@@ -238,7 +236,7 @@ export default class BlockEvents extends Module {
 
     }
 
-    // let newCurrent = this.Editor.BlockManager.currentBlock;
+    let newCurrent = this.Editor.BlockManager.currentBlock;
 
     /**
      * If enter has been pressed at the start of the text, just insert paragraph Block above
@@ -279,10 +277,6 @@ export default class BlockEvents extends Module {
    * @param {KeyboardEvent} event - keydown
    */
   private backspace(event: KeyboardEvent): void {
-    // TODO disabled if set
-
-    console.log('backspace isStructuredReport', this.config.isStructuredReport);
-
     if (this.config.isStructuredReport) {
       return;
     }

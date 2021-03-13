@@ -17637,11 +17637,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
        * @param {KeyboardEvent} event - keydown
        */
       value: function keydown(event) {
-        console.log('event', this.config);
         /**
          * Run common method for all keydown events
          */
-
         this.beforeKeydownProcessing(event);
         /**
          * Fire keydown processor by event.keyCode
@@ -17881,12 +17879,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
          */
 
 
-        if (event.shiftKey) {} // let newCurrent = this.Editor.BlockManager.currentBlock;
+        if (event.shiftKey) {}
 
+        var newCurrent = this.Editor.BlockManager.currentBlock;
         /**
          * If enter has been pressed at the start of the text, just insert paragraph Block above
          */
-
 
         if (this.Editor.Caret.isAtStart && !this.Editor.BlockManager.currentBlock.hasMedia) {
           this.Editor.BlockManager.insertDefaultBlockAtIndex(this.Editor.BlockManager.currentBlockIndex);
@@ -17926,9 +17924,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "backspace",
       value: function backspace(event) {
-        // TODO disabled if set
-        console.log('backspace isStructuredReport', this.config.isStructuredReport);
-
         if (this.config.isStructuredReport) {
           return;
         }
