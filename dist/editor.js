@@ -11913,6 +11913,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       this.config = settings.config || {};
       this.api = api;
       this.blockAPI = new _api["default"](this);
+      this.isStructuredReport = this.api.config.isStructuredReport;
       this.mutationObserver = new MutationObserver(this.didMutated);
       this.tool = new Tool({
         data: data,
@@ -12437,12 +12438,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     }, {
       key: "selected",
-      set: function set(state) {} // if (state) {
-      //   this.holder.classList.add(Block.CSS.selected);
-      // } else {
-      //   this.holder.classList.remove(Block.CSS.selected);
-      // }
-
+      set: function set(state) {
+        if (!this.isStructuredReport) {
+          if (state) {
+            this.holder.classList.add(Block.CSS.selected);
+          } else {
+            this.holder.classList.remove(Block.CSS.selected);
+          }
+        }
+      }
       /**
        * Returns True if it is Selected
        *

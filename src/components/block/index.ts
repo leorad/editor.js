@@ -56,6 +56,7 @@ interface BlockConstructorOptions {
    * This flag indicates that the Block should be constructed in the read-only mode.
    */
   readOnly: boolean;
+
 }
 
 /**
@@ -154,6 +155,8 @@ export default class Block {
    */
   private readonly api: ApiModules;
 
+  private readonly isStructuredReport: boolean;
+
   /**
    * Focused input index
    *
@@ -220,6 +223,7 @@ export default class Block {
     this.config = settings.config || {};
     this.api = api;
     this.blockAPI = new BlockAPI(this);
+    this.isStructuredReport = this.api.config.isStructuredReport;
 
     this.mutationObserver = new MutationObserver(this.didMutated);
 
@@ -422,11 +426,13 @@ export default class Block {
    * @param {boolean} state - 'true' to select, 'false' to remove selection
    */
   public set selected(state: boolean) {
-    // if (state) {
-    //   this.holder.classList.add(Block.CSS.selected);
-    // } else {
-    //   this.holder.classList.remove(Block.CSS.selected);
-    // }
+    if (!this.isStructuredReport) {
+      if (state) {
+        this.holder.classList.add(Block.CSS.selected);
+      } else {
+        this.holder.classList.remove(Block.CSS.selected);
+      }
+    }
   }
 
   /**
