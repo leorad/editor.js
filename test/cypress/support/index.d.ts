@@ -16,8 +16,12 @@ declare global {
       createEditor(editorConfig: EditorConfig): Chainable<EditorJS>
     }
 
+    interface Window {
+      $nuxt:any;
+    }
     interface ApplicationWindow {
-      EditorJS: typeof EditorJS
+      EditorJS: typeof EditorJS,
+      $nuxt:any;
     }
   }
 }
