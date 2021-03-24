@@ -195,6 +195,18 @@ export default class Blocks {
   public insert(index: number, block: Block, replace = false): void {
     console.log('add new block public insert(index: number, block: Block, replace = false): void {');
 
+    const detail = {
+      index: index,
+      block: block,
+    };
+
+    // create and dispatch the event
+    const event = new CustomEvent('EDITORJS_NEW_BLOCK_ADDED', {
+      detail: detail,
+    });
+
+    window.dispatchEvent(event);
+
     if (!this.length) {
       this.push(block);
 
@@ -305,22 +317,6 @@ export default class Blocks {
    * @param {Block} target — Block related to position
    */
   private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {
-    const detail = {
-      block: block,
-      position: position,
-    };
-
-    window.addEventListener('EDITORJS_NEW_BLOCK_ADDED', function (e) {
-      console.log('EDITORJS_NEW_BLOCK_ADDED', e);
-    });
-
-    // create and dispatch the event
-    const event = new CustomEvent('EDITORJS_NEW_BLOCK_ADDED', {
-      detail: detail,
-    });
-
-    window.dispatchEvent(event);
-
     console.log('private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {');
 
     if (position) {

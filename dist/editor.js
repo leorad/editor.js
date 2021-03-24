@@ -10912,6 +10912,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
       (0, _classCallCheck2["default"])(this, EditorJS);
 
+      // window.addEventListener('EDITORJS_NEW_BLOCK_ADDED', function (e) {
+      //   console.log('>>>>>>>>>>>>.', e);
+      // });
+
       /**
        * Set default onReady function
        */
@@ -12680,6 +12684,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       value: function insert(index, block) {
         var replace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
         console.log('add new block public insert(index: number, block: Block, replace = false): void {');
+        var detail = {
+          index: index,
+          block: block
+        }; // create and dispatch the event
+
+        var event = new CustomEvent('EDITORJS_NEW_BLOCK_ADDED', {
+          detail: detail
+        });
+        window.dispatchEvent(event);
 
         if (!this.length) {
           this.push(block);
@@ -12795,18 +12808,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "insertToDOM",
       value: function insertToDOM(block, position, target) {
-        var detail = {
-          block: block,
-          position: position
-        };
-        window.addEventListener('EDITORJS_NEW_BLOCK_ADDED', function (e) {
-          console.log('EDITORJS_NEW_BLOCK_ADDED', e);
-        }); // create and dispatch the event
-
-        var event = new CustomEvent('EDITORJS_NEW_BLOCK_ADDED', {
-          detail: detail
-        });
-        window.dispatchEvent(event);
         console.log('private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {');
 
         if (position) {

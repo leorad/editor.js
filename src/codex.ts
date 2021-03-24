@@ -44,6 +44,10 @@ export default class EditorJS {
    * @param {EditorConfig|string|undefined} [configuration] - user configuration
    */
   constructor(configuration?: EditorConfig|string) {
+    // window.addEventListener('EDITORJS_NEW_BLOCK_ADDED', function (e) {
+    //   console.log('>>>>>>>>>>>>.', e);
+    // });
+
     /**
      * Set default onReady function
      */
