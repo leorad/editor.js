@@ -72,7 +72,7 @@ export default class Blocks {
    * @returns {boolean}
    */
   public static set(instance: Blocks, property: PropertyKey, value: Block | unknown): boolean {
-    console.log('set public static set(instance: Blocks, property: PropertyKey, value: Block | unknown): boolean {');
+    // console.log('set public static set(instance: Blocks, property: PropertyKey, value: Block | unknown): boolean {');
 
     /**
      * If property name is not a number (method or other property, access it via reflect
@@ -193,7 +193,7 @@ export default class Blocks {
    * @param {boolean} replace — it true, replace block on given index
    */
   public insert(index: number, block: Block, replace = false): void {
-    console.log('add new block public insert(index: number, block: Block, replace = false): void {');
+    // console.log('add new block public insert(index: number, block: Block, replace = false): void {');
 
     const detail = {
       index: index,
@@ -247,7 +247,7 @@ export default class Blocks {
    * @param {number} index - index of Block to remove
    */
   public remove(index: number): void {
-    console.log('remove public remove(index: number): void {');
+    // console.log('remove public remove(index: number): void {');
 
     if (isNaN(index)) {
       index = this.length - 1;
@@ -264,7 +264,7 @@ export default class Blocks {
    * Remove all blocks
    */
   public removeAll(): void {
-    console.log('public removeAll(): void {');
+    // console.log('public removeAll(): void {');
 
     this.workingArea.innerHTML = '';
 
@@ -282,7 +282,7 @@ export default class Blocks {
    * @param {Block} newBlock — Block to insert
    */
   public insertAfter(targetBlock: Block, newBlock: Block): void {
-    console.log('public insertAfter(targetBlock: Block, newBlock: Block): void {');
+    // console.log('public insertAfter(targetBlock: Block, newBlock: Block): void {');
 
     const index = this.blocks.indexOf(targetBlock);
 
@@ -317,7 +317,7 @@ export default class Blocks {
    * @param {Block} target — Block related to position
    */
   private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {
-    console.log('private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {');
+    // console.log('private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {');
 
     if (position) {
       target.holder.insertAdjacentElement(position, block.holder);
@@ -335,7 +335,7 @@ export default class Blocks {
    * @param {object} detail - event detail
    */
   private composeBlockEvent(type: string, detail: object): MoveEvent {
-    console.log('private composeBlockEvent(type: string, detail: object): MoveEvent {');
+    // console.log('private composeBlockEvent(type: string, detail: object): MoveEvent {');
 
     return new CustomEvent(type, {
       detail,

@@ -12683,7 +12683,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       key: "insert",
       value: function insert(index, block) {
         var replace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-        console.log('add new block public insert(index: number, block: Block, replace = false): void {');
+        // console.log('add new block public insert(index: number, block: Block, replace = false): void {');
         var detail = {
           index: index,
           block: block
@@ -12733,8 +12733,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "remove",
       value: function remove(index) {
-        console.log('remove public remove(index: number): void {');
-
+        // console.log('remove public remove(index: number): void {');
         if (isNaN(index)) {
           index = this.length - 1;
         }
@@ -12750,7 +12749,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "removeAll",
       value: function removeAll() {
-        console.log('public removeAll(): void {');
+        // console.log('public removeAll(): void {');
         this.workingArea.innerHTML = '';
         this.blocks.forEach(function (block) {
           return block.call(_block.BlockToolAPI.REMOVED);
@@ -12769,7 +12768,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "insertAfter",
       value: function insertAfter(targetBlock, newBlock) {
-        console.log('public insertAfter(targetBlock: Block, newBlock: Block): void {');
+        // console.log('public insertAfter(targetBlock: Block, newBlock: Block): void {');
         var index = this.blocks.indexOf(targetBlock);
         this.insert(index + 1, newBlock);
       }
@@ -12808,8 +12807,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "insertToDOM",
       value: function insertToDOM(block, position, target) {
-        console.log('private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {');
-
+        // console.log('private insertToDOM(block: Block, position?: InsertPosition, target?: Block): void {');
         if (position) {
           target.holder.insertAdjacentElement(position, block.holder);
         } else {
@@ -12828,7 +12826,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }, {
       key: "composeBlockEvent",
       value: function composeBlockEvent(type, detail) {
-        console.log('private composeBlockEvent(type: string, detail: object): MoveEvent {');
+        // console.log('private composeBlockEvent(type: string, detail: object): MoveEvent {');
         return new CustomEvent(type, {
           detail: detail
         });
@@ -12875,11 +12873,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }], [{
       key: "set",
       value: function set(instance, property, value) {
-        console.log('set public static set(instance: Blocks, property: PropertyKey, value: Block | unknown): boolean {');
+        // console.log('set public static set(instance: Blocks, property: PropertyKey, value: Block | unknown): boolean {');
+
         /**
          * If property name is not a number (method or other property, access it via reflect
          */
-
         if (isNaN(Number(property))) {
           Reflect.set(instance, property, value);
           return true;
